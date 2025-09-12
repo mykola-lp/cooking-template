@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const modulesConfig = [
       { path: './scripts/logo-animation.js', fn: 'initLogoAnimations' },
       { path: './scripts/burger-menu.js', fn: 'initBurgerMenu' },
-      { path: './scripts/link-status.js', fn: 'initLinkStatus' }  
+      { path: './scripts/link-status.js', fn: 'initLinkStatus' },
+      { path: './scripts/carousel.js', fn: 'initCarousel' }
     ];
 
     await Promise.all(modulesConfig.map(async mod => {

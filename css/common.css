@@ -2,7 +2,9 @@
   --white: #ffffff;
   --black: #000000;
   --picton-blue: #3897f0;
+  --light-cyan: #e0f7fa;
   --lighter-cyan: #e7fafe;
+  --light-grayish-cyan: #e7f9fd;
 
   --accent: #d9852c;
 }
@@ -51,6 +53,90 @@ a {
   padding: 0 10px;
 }
 
+/* === Section Title & Text === */
+
+.section-title {
+  font-weight: 600;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: clamp(40px, 6vw, 77px);
+  letter-spacing: -0.04em;
+}
+
+.section-summary {
+  font-weight: 400;
+  font-size: clamp(14px, 2vw, 16px);
+  line-height: clamp(22px, 3vw, 28px);
+
+  opacity: 0.6;
+}
+
+.section-name {
+  font-weight: 700;
+  font-size: clamp(12px, 1.8vw, 16px);
+  line-height: clamp(17px, 2.2vw, 19px);
+  letter-spacing: -0.02em;
+}
+
+.section-text {
+  font-weight: 600;
+  font-size: clamp(13px, 1.5vw, 14px);
+  line-height: clamp(16px, 2vw, 17px);
+  letter-spacing: -0.02em;
+}
+
+/* === Buttons === */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(6px, 1vw, 8px);
+
+  border-radius: 16px;
+  padding: clamp(12px, 2vw, 18px) clamp(20px, 4vw, 36px);
+
+  font-weight: 600;
+  font-size: clamp(13px, 1.5vw, 14px);
+  line-height: clamp(16px, 2vw, 17px);
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease,
+              transform 0.1s ease,
+              box-shadow 0.1s ease;
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn--primary {
+  color: var(--white);
+  background-color: var(--black);
+}
+
+.btn__icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: clamp(20px, 2vw, 24px);
+  height: clamp(20px, 2vw, 24px);
+  border-radius: 50%;
+
+  color: var(--black);
+  background-color: var(--white);
+
+  font-size: clamp(12px, 1.5vw, 14px);
+  line-height: 1;
+}
+
+.btn__text {
+  display: inline-block;
+}
+
 /* === Logo === */
 
 .logo {
@@ -73,3 +159,26 @@ a {
   max-width: 100%;
   height: auto;
 }
+
+/* === Chips (icon + text) === */
+
+.chips {
+  display: flex;
+  gap: clamp(8px, 1.5vw, 13px);
+
+  margin-top: clamp(20px, 4vw, 35px);
+  margin-bottom: clamp(40px, 8vw, 105px);
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 1.2vw, 10px);
+
+  border-radius: 30px;
+  padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 12px);
+
+  background: rgba(0, 0, 0, 0.05);
+}
+
