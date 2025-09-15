@@ -1,10 +1,16 @@
 .hero {
   padding: 40px 0;
   overflow: hidden;
+  z-index: 0;
 }
 
 .hero__carousel {
   position: relative;
+  overflow: visible;
+}
+
+.hero__viewport {
+  overflow: hidden;
 }
 
 /* Strip */
@@ -46,9 +52,9 @@
 /* === Slide === */
 
 .hero__slide {
-  flex: 0 0 100%;
+  flex: 0 0 100%; /* Take full width of carousel track */
 
-  display: grid;
+  display: grid; /* Use CSS Grid for internal layout */
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
 
@@ -137,23 +143,26 @@
   position: absolute;
   bottom: 16px;
   left: 50%;
-  transform: translateX(-50%);
+  z-index: 2;
+
   display: flex;
   gap: 8px;
-  z-index: 2;
+
+  transform: translateX(-50%);
 }
 
 .hero__indicators span {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #bbb;
+
+  background-color: var(--light-shade-gray);
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
 }
 
 .hero__indicators .active {
-  background: #000;
+  background-color: var(--black);
 }
 
 @media screen and (max-width: 960px) {
@@ -176,7 +185,7 @@
     grid-template-columns: 1fr;
     grid-template-areas:
       "image"
-      "content"; /* картинка зверху */
+      "content"; /* Swapped order: image appears above content */
   }
 
   .hero__content {
@@ -189,10 +198,14 @@
   .hero__image-pic {
     width: 100%;
     max-height: 250px;
-    object-fit: cover; /* «врізає» по контейнеру */
+    object-fit: cover;
 
     border-top-left-radius: 7%;
     border-top-right-radius: 7%;
     border-bottom-right-radius: 0;
+  }
+
+  .hero__indicators {
+    bottom: 12px;
   }
 }

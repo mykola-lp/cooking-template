@@ -1,87 +1,152 @@
+// Carousel functionality for the hero section
+
 export function initCarousel() {
-  const carousels = document.querySelectorAll("[data-js-carousel]");
+  const carousel = document.querySelector("[data-js-carousel]");
+  if (!carousel) return;
 
-  carousels.forEach((carousel) => {
-    const track = carousel.querySelector(".hero__track");
-    const slides = carousel.querySelectorAll(".hero__slide");
+  const viewport = carousel.querySelector(".hero__viewport") || carousel;
+  const track = carousel.querySelector(".hero__track");
+  const slides = Array.from(track.children);
 
-    if (slides.length === 0) return;
+  if (slides.length <= 1) return; // 0 or 1 slide → do nothing
 
-    slides.forEach((slide, i) => {
-      slide.dataset.slide = i + 1;
-      slide.classList.add(`slider-${i + 1}`);
+  // --- STATE ---
+  let current = 0;
+  let direction = 1; // 1 = forward, -1 = backward
+  let autoplayTimer = null;
+
+  const AUTOPLAY_DELAY = parseInt(carousel.dataset.interval) || 3000;
+  const STEP_DELAY = 400;
+
+  // --- DOTS ---
+  const dotsContainer = getOrCreateDotsContainer(carousel);
+  const dots = createDots(slides, dotsContainer);
+
+  // --- INITIAL SETUP ---
+  updateUI();
+  startAutoplay();
+  setupAutoplayToggle();
+  setupMouseCursor();
+  setupViewportClick();
+  setupKeyboardNavigation();
+
+  // --- FUNCTIONS ---
+  function getOrCreateDotsContainer(carousel) {
+    let container = carousel.querySelector(".hero__indicators");
+  
+    if (!container) {
+      container = document.createElement("div");
+      container.classList.add("hero__indicators");
+      carousel.appendChild(container);
+    }
+  
+    return container;
+  }
+
+  function createDots(slides, container) {
+    const dotsArr = [];
+
+    slides.forEach((_, idx) => {
+      const dot = document.createElement("span");
+
+      dot.setAttribute("role", "button");
+      dot.setAttribute("aria-label", `Go to slide ${idx + 1}`);
+
+      if (idx === 0) dot.classList.add("active");
+
+      dot.addEventListener("click", () => goToSlide(idx));
+      container.appendChild(dot);
+      dotsArr.push(dot);
     });
 
-    let dots = [];
-    if (slides.length > 1) {
-      let indicators = document.createElement("div");
-      indicators.classList.add("hero__indicators");
-      slides.forEach((_, i) => {
-        const dot = document.createElement("span");
-        dot.setAttribute("role", "button");
-        dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
-        indicators.appendChild(dot);
-        dots.push(dot);
-      });
-      carousel.appendChild(indicators);
+    return dotsArr;
+  }
+
+  function updateUI() {
+    slides.forEach((s, i) => s.classList.toggle("active", i === current));
+    dots.forEach((d, i) => d.classList.toggle("active", i === current));
+    track.style.transform = `translateX(-${current * 100}%)`;
+  }
+
+  function nextSlide() {
+    let next = current + direction;
+
+    if (next >= slides.length || next < 0) {
+      direction = -direction;
+      next = current + direction;
     }
 
-    let index = 0;
-    const interval = parseInt(carousel.dataset.interval) || 3000;
-    let timer;
+    current = next;
+    updateUI();
+  }
 
-    function showSlide(i) {
-      index = (i + slides.length) % slides.length; // loop
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((dot, j) => dot.classList.toggle("active", j === index));
-    }
+  function stopAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  }
 
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", () => {
-        showSlide(i);
-        resetTimer();
-      });
-    });
+  function startAutoplay() {
+    stopAutoplay();
 
-    function startTimer() {
-      timer = setInterval(() => showSlide(index + 1), interval);
-    }
-    function resetTimer() {
-      clearInterval(timer);
-      startTimer();
-    }
+    if (!isAutoplayAllowed()) return;
+    autoplayTimer = setInterval(nextSlide, AUTOPLAY_DELAY);
+  }
 
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  function isAutoplayAllowed() {
+    return window.matchMedia("(min-width: 769px)").matches;
+  }
+
+  function goToSlide(target) {
+    stopAutoplay();
+    current = target;
+    updateUI();
+    setTimeout(resetAutoplay, STEP_DELAY);
+  }
+
+  function setupMouseCursor() {
     carousel.addEventListener("mousemove", (e) => {
-      if (slides.length <= 1) return;
       const rect = carousel.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      carousel.style.cursor = x < rect.width / 2 ? "w-resize" : "e-resize";
-    });
+      const leftZone = rect.width * 0.2;
+      const rightZone = rect.width * 0.8;
 
-    carousel.addEventListener("click", (e) => {
-      if (slides.length <= 1) return;
-      const rect = carousel.getBoundingClientRect();
+      if (x < leftZone) carousel.style.cursor = "w-resize";
+      else if (x > rightZone) carousel.style.cursor = "e-resize";
+      else carousel.style.cursor = "default";
+    });
+  }
+
+  function setupViewportClick() {
+    viewport.addEventListener("click", (e) => {
+      const rect = viewport.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      if (x < rect.width / 2) showSlide(index - 1);
-      else showSlide(index + 1);
-      resetTimer();
-    });
 
+      if (x < rect.width / 2) goToSlide(Math.max(0, current - 1));
+      else goToSlide(Math.min(slides.length - 1, current + 1));
+    });
+  }
+
+  function setupKeyboardNavigation() {
     document.addEventListener("keydown", (e) => {
-      if (slides.length <= 1) return;
-      if (e.key === "ArrowLeft") showSlide(index - 1);
-      if (e.key === "ArrowRight") showSlide(index + 1);
+      if (e.key === "ArrowLeft") goToSlide(Math.max(0, current - 1));
+      if (e.key === "ArrowRight") goToSlide(Math.min(slides.length - 1, current + 1));
     });
+  }
 
-    track.style.display = "flex";
-    track.style.transition = "none";
-    slides.forEach((s) => (s.style.flex = "0 0 100%"));
+  function setupAutoplayToggle() {
+    const mediaQuery = window.matchMedia("(min-width: 769px)");
 
-    showSlide(index);
+    const handleResize = () => {
+      if (mediaQuery.matches) startAutoplay();
+      else stopAutoplay();
+    };
 
-    requestAnimationFrame(() => {
-      track.style.transition = "transform 0.5s ease";
-      if (slides.length > 1) startTimer();
-    });
-  });
+    handleResize();
+    mediaQuery.addEventListener("change", handleResize);
+  }
 }
