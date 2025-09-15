@@ -1,0 +1,102 @@
+.categories {
+  padding-top: 120px;
+  padding-bottom: 45px;
+}
+
+.categories__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+
+  margin-bottom: 80px;
+}
+
+.categories__list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 35px;
+}
+
+.categories__item {
+  position: relative;
+  z-index: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  width: 180px;
+  height: auto;
+  aspect-ratio: 180 / 195;
+
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+}
+
+.categories__item::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  border-radius: 30px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(112, 130, 70, 0) 0%,
+    rgba(112, 130, 70, 0.1) 100%
+  );
+}
+
+.categories__item:hover {
+  transform: translateY(-5px);
+}
+
+.categories__item--breakfast {
+  filter: drop-shadow(22px 5px 11px rgba(0, 0, 0, 0.3));
+}
+
+.categories__item--vegan {
+  filter: drop-shadow(22px 5px 11px rgba(6, 124, 45, 0.3));
+}
+
+.categories__item--meat {
+  filter: drop-shadow(22px 5px 11px rgba(241, 59, 3, 0.3));
+}
+
+.categories__item--dessert {
+  filter: drop-shadow(22px 5px 11px rgba(154, 156, 4, 0.233));
+}
+
+.categories__item--lunch {
+  filter: drop-shadow(22px 5px 11px rgba(203, 206, 28, 0.3));
+}
+
+.categories__item--chocolate {
+  filter: drop-shadow(22px 5px 11px rgba(216, 135, 133, 0.836));
+}
+
+.categories__item-title {
+  margin-top: 25px;
+}
+
+@media screen and (max-width: 580px) {
+  .categories {
+    padding-top: 60px;
+  }
+
+  .categories__heading {
+    flex-direction: column;
+    margin-bottom: 35px;
+  }
+
+  .categories__view-all {
+    position: relative;
+    top: -25px;
+  }
+}

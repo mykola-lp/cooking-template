@@ -63,6 +63,27 @@ a {
   letter-spacing: -0.04em;
 }
 
+.section-caption {
+  font-weight: 600;
+  font-size: clamp(32px, 5vw, 48px);
+  line-height: clamp(40px, 6vw, 58px);
+  letter-spacing: -0.04em;
+}
+
+.section-view {
+  font-weight: 600;
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: clamp(18px, 1.5vw, 19px);
+  letter-spacing: -0.02em;
+}
+
+.section-item {
+  font-weight: 600;
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: clamp(20px, 2.5vw, 22px);
+  letter-spacing: -0.02em;
+}
+
 .section-summary {
   font-weight: 400;
   font-size: clamp(14px, 2vw, 16px);
@@ -159,6 +180,30 @@ a {
 .logo-img {
   max-width: 100%;
   height: auto;
+}
+
+/* === Section Badge === */
+
+.section-badge {
+  border-radius: 16px;
+  padding: 20px 27px;
+  cursor: pointer;
+
+  color: var(--black);
+  background-color: var(--lighter-cyan);
+  
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.section-badge:hover {
+  background-color: var(--light-grayish-cyan);
+
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.section-badge:active {
+  transform: scale(0.95);
 }
 
 /* === Chips (icon + text) === */
