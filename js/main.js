@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       { path: './scripts/logo-animation.js', fn: 'initLogoAnimations' },
       { path: './scripts/burger-menu.js', fn: 'initBurgerMenu' },
       { path: './scripts/link-status.js', fn: 'initLinkStatus' },
-      { path: './scripts/carousel.js', fn: 'initCarousel' }
+      { path: './scripts/carousel.js', fn: 'initCarousel' },
+      { path: './scripts/load-more.js', fn: 'initLoadMore', query: '[data-js-load-more]' },
+      { path: './scripts/toggle-favorite.js', fn: 'initFavoriteToggles' }
     ];
 
     await Promise.all(modulesConfig.map(async mod => {
