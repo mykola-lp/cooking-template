@@ -1,0 +1,103 @@
+.recipes-popular {
+  padding-top: 138px;
+  padding-bottom: 70px;
+}
+
+.recipes-popular__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.recipes-popular__summary {
+  max-width: 760px;
+  text-align: center;
+}
+
+.recipes-popular__list {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(clamp(200px, 40%, 400px), 1fr)
+  );
+  gap: 40px;
+
+  margin-top: 96px;
+  margin-bottom: 15px;
+}
+
+.recipes-popular__card {
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px 16px 0;
+
+  background: linear-gradient(180deg, rgba(231, 249, 253, 0) 0%, #e7f9fd 100%);
+  border-radius: 30px;
+}
+
+/* 1 item - fixed */
+.ad-item {
+  grid-column: 3;
+  grid-row: 2;
+
+  text-align: center;
+}
+
+.recipes-popular__wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+  border-radius: 30px;
+}
+
+.recipes-popular__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.recipes-popular__wrapper:hover .recipes-popular__image {
+  transform: scale(1.1);
+}
+
+.recipes-popular__chips,
+.recipes-popular__card-title {
+  padding-left: 7px;
+}
+
+.recipes-popular__card-title {
+  font-size: 24px;
+  line-height: 32px;
+  text-align: left;
+  margin-top: 24px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 477px) and (max-width: 1024px) {
+  .recipes-popular {
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+
+  .ad-item {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+  }
+}
+
+@media screen and (max-width: 476px) {
+  .recipes-popular {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .ad-item {
+    grid-column: 1;
+    grid-row: 5;
+  }
+}

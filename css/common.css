@@ -6,6 +6,9 @@
   --light-shade-gray: #bbbbbb;
   --lighter-cyan: #e7fafe;
   --light-grayish-cyan: #e7f9fd;
+  --light-grayish-blue: #dbe2e5;
+  --red-infrared-burn: #dd3333;
+  --fusion-red: #ff6363;
 
   --accent: #d9852c;
 }
@@ -124,9 +127,8 @@ a {
   cursor: pointer;
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: background-color 0.3s ease,
-              transform 0.1s ease,
-              box-shadow 0.1s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease,
+    box-shadow 0.1s ease;
 }
 
 .btn:active {
@@ -191,15 +193,16 @@ a {
 
   color: var(--black);
   background-color: var(--lighter-cyan);
-  
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.3s ease;
 }
 
 .section-badge:hover {
   background-color: var(--light-grayish-cyan);
 
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .section-badge:active {
@@ -212,8 +215,8 @@ a {
   display: flex;
   gap: clamp(8px, 1.5vw, 13px);
 
-  margin-top: clamp(20px, 4vw, 35px);
-  margin-bottom: clamp(40px, 8vw, 105px);
+  margin-top: clamp(14px, 4vw, 24px);
+  margin-bottom: clamp(22px, 4vw, 32px);
 }
 
 .chip {
@@ -222,9 +225,113 @@ a {
   justify-content: center;
   gap: clamp(6px, 1.2vw, 10px);
 
-  border-radius: 30px;
-  padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 12px);
-
-  background: rgba(0, 0, 0, 0.05);
+  font-weight: 500;
+  cursor: pointer;
 }
 
+.chip--filled {
+  border-radius: 30px;
+  padding: clamp(6px, 1.5vw, 8px) clamp(8px, 2vw, 14px);
+
+  color: var(--black);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.chip--outline {
+  background-color: transparent;
+}
+
+.chip__text {
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+/* === Favorite (Icon Like/Heart) === */
+
+.recipe-card__favorite {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+
+  width: 48px;
+  height: 48px;
+
+  border: none;
+  border-radius: 50%;
+  background-color: var(--white);
+
+  cursor: pointer;
+}
+
+.recipe-card__favorite::before {
+  content: "";
+  display: block;
+
+  width: 22px;
+  height: 22px;
+  margin: auto;
+
+  background-color: var(--light-grayish-blue);
+
+  -webkit-mask: url("/img/icon/favorite.svg") no-repeat center / contain;
+  mask: url("/img/icon/favorite.svg") no-repeat center / contain;
+
+  transition: background-color 0.2s, transform 0.2s;
+
+  pointer-events: none;
+}
+
+.recipe-card__favorite.is-active::before {
+  background-color: var(--fusion-red);
+  transform: scale(1.05);
+}
+
+/* Hover / tap effect */
+.recipe-card__favorite:hover,
+.recipe-card__favorite:focus {
+  transform: scale(1.1);
+}
+.recipe-card__favorite:active {
+  transform: scale(0.95);
+}
+
+.recipe-card__favorite:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 80, 80, 0.14);
+}
+
+/* === "Show more" (Arrow) === */
+
+.recipes-popular__list:not(.js-ready) .recipes-popular__card,
+.recipes-popular__card.is-hidden {
+  display: none; /* do unified code for 2 sections */
+}
+
+.load-more-wrapper {
+  grid-column: 1 / -1;
+  padding-top: 9px;
+  text-align: center;
+}
+
+#load-more {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  border: 2px solid var(--red-infrared-burn);
+
+  color: var(--red-infrared-burn);
+  background: rgba(255, 255, 255, 0.7);
+
+  font-size: 16px;
+
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+#load-more:hover {
+  color: var(--white);
+  background-color: var(--red-infrared-burn);
+  transform: scale(1.1);
+}
