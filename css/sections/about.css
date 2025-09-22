@@ -1,0 +1,114 @@
+.about {
+  padding-top: 73px;
+  padding-bottom: 80px;
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 44px;
+}
+
+.about__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+
+  height: 100%;
+  width: 526px;
+}
+
+.about__text {
+  margin-bottom: 48px;
+}
+
+.about__images {
+  position: relative;
+  display: inline-block;
+
+  border-radius: 30px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(231, 249, 253, 0) 0%, 
+    var(--light-grayish-cyan) 100%
+  );
+}
+
+.about__images::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image: 
+    url("../../img/icon/tomato.svg"),
+    url("../../img/icon/meat.svg"),
+    url("../../img/icon/onion.svg"),
+    url("../../img/icon/spinach.svg");
+  background-repeat: no-repeat;
+  background-size: 10% 10%, 15% 15%, 10% 10%, 15% 15%;
+  background-position: 
+    0% 80%,
+    10% 10%,
+    80% 15%,
+    90% 40%;
+  
+  animation: bounce 1.5s ease-in infinite;
+  transition: background-position 1s ease;
+}
+
+.about__images:hover::after {
+  background-position: 
+    left 40px bottom 80px,
+    left 10px top 100px,
+    right 120px top 90px,
+    right 60px top 180px;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  30%      { transform: translateY(-20px); }
+  50%      { transform: translateY(-10px); }
+  70%      { transform: translateY(-15px); }
+}
+
+.about__image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+
+  transform: translateX(-60px);
+}
+
+@media screen and (max-width: 1024px) {
+  .about {
+    padding-top: 43px;
+    padding-bottom: 50px;
+  }
+
+  .about__inner {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+
+  .about__content {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about__text {
+    margin-bottom: 18px;
+  }
+
+  .about__images {
+    max-width: 90%;
+    margin: 0 auto; 
+    transform: none;
+  }
+}
+
