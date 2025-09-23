@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       { path: './scripts/link-status.js', fn: 'initLinkStatus' },
       { path: './scripts/carousel.js', fn: 'initCarousel' },
       { path: './scripts/load-more.js', fn: 'initLoadMore', query: '[data-js-load-more]' },
-      { path: './scripts/toggle-favorite.js', fn: 'initFavoriteToggles' }
+      { path: './scripts/toggle-favorite.js', fn: 'initFavoriteToggles' },
+      { path: './scripts/gallery-slider.js', fn: 'initGallerySlider', query: '[data-gallery]', all: true },
     ];
 
     await Promise.all(modulesConfig.map(async mod => {
