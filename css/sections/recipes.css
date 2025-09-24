@@ -43,7 +43,7 @@
   margin-bottom: 24px;
 }
 
-.recipes-card__meta {
+.recipes-card__chips {
   display: flex;
   align-items: center;
   gap: 24px;
@@ -54,11 +54,6 @@
     grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
-  }
-
-  .recipes-featured__tagline {
-    max-width: 508px;
-    width: 100%;
   }
 }
 
