@@ -12,6 +12,10 @@
   --fusion-red: #ff6363;
 
   --accent: #d9852c;
+  --gray-text-muted: #aaa;
+  --gray-text-light: #ddd;
+  --black-bg-muted: #222;
+  --black-bg-light: #444;
 }
 
 * {
@@ -138,13 +142,13 @@ a {
 }
 
 .btn--primary:hover {
-  background-color: #222;
+  background-color: var(--black-bg-muted);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25), 0 0 10px rgba(255, 255, 255, 0.1);
   transform: translateY(-1px);
 }
 
 .btn--primary:active {
-  background-color: #111;
+  background-color: var(--black-bg-light);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transform: translateY(1px);
 }
