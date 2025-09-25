@@ -16,7 +16,28 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 40px;
+
+  grid-auto-flow: row;
 }
+
+.recipes__item {
+  display: block;
+  overflow: hidden;
+}
+
+.recipes-card {
+  transform: translate(-100%, -100%);
+  animation: reveal 0.7s ease forwards;
+}
+
+.recipes__item:nth-child(1) .recipes-card { animation-delay: 0.1s; }
+.recipes__item:nth-child(2) .recipes-card { animation-delay: 0.2s; }
+.recipes__item:nth-child(3) .recipes-card { animation-delay: 0.3s; }
+.recipes__item:nth-child(4) .recipes-card { animation-delay: 0.4s; }
+.recipes__item:nth-child(5) .recipes-card { animation-delay: 0.5s; }
+.recipes__item:nth-child(6) .recipes-card { animation-delay: 0.6s; }
+.recipes__item:nth-child(7) .recipes-card { animation-delay: 0.7s; }
+.recipes__item:nth-child(8) .recipes-card { animation-delay: 0.8s; }
 
 .recipes-card__image-wrapper {
   position: relative;

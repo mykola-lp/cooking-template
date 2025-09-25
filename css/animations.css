@@ -4,3 +4,9 @@
     transform: translateY(0);
   }
 }
+
+@keyframes reveal {
+  to {
+    transform: translate(0, 0);
+  }
+}
