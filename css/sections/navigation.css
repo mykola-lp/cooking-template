@@ -41,6 +41,7 @@
 
 .menu__link {
   position: relative;
+  display: inline-block;
 
   font-size: 16px;
   line-height: 19px;
@@ -60,7 +61,7 @@
   width: 0%;
   height: 2px;
 
-  background: var(--picton-blue);
+  background-color: var(--picton-blue);
   transition: width 0.3s ease;
 }
 
