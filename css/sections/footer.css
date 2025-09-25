@@ -1,0 +1,144 @@
+.footer {
+  padding-top: 12px;
+}
+
+.footer__top,
+.footer__bottom {
+  width: 100%;
+}
+
+.footer__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
+
+.footer__summary {
+  margin-top: 16px;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideInLeft 0.8s ease forwards;
+}
+
+.menu--footer {
+  justify-content: flex-end;
+
+  opacity: 0;
+  transform: translateX(50px);
+  animation: slideInRight 0.8s ease forwards;
+  animation-delay: 0.4s;
+}
+
+.footer__bottom {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 48px 0;
+}
+
+.footer__copyright {
+  position: absolute;
+  left: 50%;
+
+  margin: 0;
+  color: rgba(0, 0, 0, 0.6);
+  
+  font-family: "Eudoxus Sans";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 23px;
+  text-align: center;
+  letter-spacing: -0.02em;
+
+  transform: translateX(-50%);
+}
+
+.footer__author {
+  color: var(--fusion-red);
+}
+
+@media screen and (max-width: 968px) {
+  .footer__top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 25px;
+  }
+
+  .footer__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__summary {
+    max-width: 500px;
+    margin-top: 12px;
+
+    order: 1;
+    transform: translateY(-20px);
+    animation: slideInTop 0.8s ease forwards;
+  }
+
+  .menu--footer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    order: 2;
+    transform: translateY(20px);
+    animation: slideInBottom 0.8s ease forwards;
+    animation-delay: 0.4s;
+  }
+
+  .menu--footer .menu__link {
+    position: relative;
+    display: inline-block;
+  }
+
+  .menu--footer .menu__link::after{
+    content: "";
+  
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+
+    width: 35%;
+    height: 2px;
+
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center center;
+    transition: transform 0.28s ease;
+    will-change: transform;
+  }
+
+  .menu--footer .menu__link:hover::after,
+  .menu--footer .menu__link:focus::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  .footer__bottom {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    padding: 24px 0;
+  }
+
+  .footer__copyright {
+    position: static;
+    font-size: 14px;
+    line-height: 20px;
+    transform: none;
+  }
+}
+

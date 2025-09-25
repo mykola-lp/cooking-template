@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       { path: './scripts/load-more.js', fn: 'initLoadMore', query: '[data-js-load-more]' },
       { path: './scripts/toggle-favorite.js', fn: 'initFavoriteToggles' },
       { path: './scripts/gallery-slider.js', fn: 'initGallerySlider', query: '[data-gallery]', all: true },
+      { path: './scripts/current-year.js', fn: 'initCurrentYear' },
     ];
 
     await Promise.all(modulesConfig.map(async mod => {
